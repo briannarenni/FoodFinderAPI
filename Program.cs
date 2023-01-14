@@ -21,23 +21,7 @@ if (app.Environment.IsDevelopment())
 // app.MapGet("/restaurants", async (FoodFinderDB db) => await db.Players.ToListAsync());
 // app.MapGet("/ratings", async (FoodFinderDB db) => await db.Players.ToListAsync());
 // app.MapGet("/menus", async (FoodFinderDB db) => await db.Players.ToListAsync());
+// app.MapPost: return Results.Created($"/todo/player.playerId", player)
+// app.MapPatch: return Results.NoContent();
 
 app.Run();
-
-
-// app.MapPost("/players", async (PlayerDB db, Player player) =>
-// {
-//     await db.Players.AddAsync(player);
-//     await db.SaveChangesAsync();
-//     return Results.Created($"/todo/player.playerId", player);
-// });
-
-// app.MapPatch("/players/{id}", async (PlayerDB db, int playerId, int addXP) =>
-// {
-//     var player = await db.Players.FindAsync(playerId);
-//     if (player is null) return Results.NotFound();
-//     player.totalXP += addXP;
-//     await db.SaveChangesAsync();
-
-//     return Results.NoContent();
-// });
