@@ -1,2 +1,3 @@
 # FoodFinderAPI
-Pairs with (FoodFinder)[https://github.com/briannarenni/FoodFinder]
+
+Pairs with [FoodFinder](https://github.com/briannarenni/FoodFinder)
