@@ -1,3 +1,2 @@
 # FoodFinderAPI
-
-Pairs with [FoodFinder](https://github.com/briannarenni/FoodFinder)
+Small demo project, pairs with [FoodFinder](https://github.com/briannarenni/FoodFinder).
