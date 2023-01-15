@@ -15,8 +15,8 @@ namespace FoodFinder.Models
     {
         public int RatingId { get; set; }
         public int RestId { get; set; }
-        public string Grade { get; set; }
-        public double Score { get; set; }
+        public char Grade { get; set; }
+        public int Score { get; set; }
         public DateTime ScoreDate { get; set; }
         public virtual Restaurant Restaurant { get; set; }
     }
@@ -27,11 +27,11 @@ namespace FoodFinder.Models
         {
             builder.ToTable("Rating");
             builder.HasKey(r => r.RatingId);
-            builder.Property(r => r.RatingId).HasColumnName("RatingId").ValueGeneratedOnAdd();
-            builder.Property(r => r.RestId).HasColumnName("RestId").IsRequired();
-            builder.Property(r => r.Grade).HasColumnName("Grade").IsRequired();
-            builder.Property(r => r.Score).HasColumnName("Score").IsRequired();
-            builder.Property(r => r.ScoreDate).HasColumnName("ScoreDate").IsRequired();
+            builder.Property(r => r.RatingId).HasColumnName("rating_id").ValueGeneratedOnAdd();
+            builder.Property(r => r.RestId).HasColumnName("rest_id").IsRequired();
+            builder.Property(r => r.Grade).HasColumnName("grade").IsRequired();
+            builder.Property(r => r.Score).HasColumnName("score").IsRequired();
+            builder.Property(r => r.ScoreDate).HasColumnName("score_date").IsRequired();
             builder.HasOne(r => r.Restaurant)
                 .WithOne(r => r.Rating)
                 .HasForeignKey<Rating>(r => r.RestId);

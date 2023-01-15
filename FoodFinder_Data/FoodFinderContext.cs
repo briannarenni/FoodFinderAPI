@@ -17,5 +17,38 @@ namespace FoodFinder.Data
             builder.ApplyConfiguration(new RatingConfiguration());
 
         }
+
+        public async Task<List<Restaurant>> GetAllRestaurants()
+        {
+            return await Restaurant
+                .Include(r => r.Rating)
+                .Select(r => new Restaurant
+                {
+                    Id = r.Id,
+                    RestName = r.RestName,
+                    Cuisine = r.Cuisine,
+                    City = r.City,
+                    Rating = new RestaurantRating { Score = r.Rating.Score, Grade = r.Rating.Grade }
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<Restaurant>> GetByHighestRating()
+        {
+            return await Restaurant
+                .Include(r => r.Rating)
+                .Select(r => new Restaurant
+                {
+                    Id = r.Id,
+                    RestName = r.RestName,
+                    Cuisine = r.Cuisine,
+                    City = r.City,
+                    Rating = new RestaurantRating { Score = r.Rating.Score, Grade = r.Rating.Grade }
+                })
+                .OrderByDescending(r => r.Rating.Score)
+                .Take(10)
+                .ToListAsync();
+        }
+
     }
 }

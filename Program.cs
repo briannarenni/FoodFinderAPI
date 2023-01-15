@@ -20,13 +20,14 @@ if (app.Environment.IsDevelopment())
 
 // TODO: Get all restaurants alphabetically
 // app.MapGet("/restaurants", async (FoodFinderContext db) => await db.Restaurants.ToListAsync());
-app.MapGet("/restaurants", async (FoodFinderContext db) => await db.Restaurant.AsQueryable().ToListAsync());
+app.MapGet("/restaurants", async (FoodFinderContext db) => await db.GetAllRestaurants());
 
 // TODO: Get all restaurants by cuisine, alphabetical
 
 // TODO: Get all restaurants by given city (string)
 
 // TODO: Get all restaurants by highest rating
+app.MapGet("/restaurants/{score}", async (FoodFinderContext db) => await db.GetByHighestRating());
 
 // TODO: Get all restaurants by lowest rating
 
