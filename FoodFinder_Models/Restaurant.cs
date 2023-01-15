@@ -19,7 +19,9 @@ namespace FoodFinder.Models
         public string RestName { get; set; }
         public string Cuisine { get; set; }
         public string City { get; set; }
-        public RestaurantRating Rating { get; set; }
+        public int RestaurantRatingId { get; set; }
+        public RestaurantRating RestaurantRating { get; set; }
+
     }
 
     public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
@@ -32,6 +34,10 @@ namespace FoodFinder.Models
             builder.Property(r => r.RestName).HasColumnName("rest_name").IsRequired().HasMaxLength(100);
             builder.Property(r => r.Cuisine).HasColumnName("cuisine").IsRequired().HasMaxLength(50);
             builder.Property(r => r.City).HasColumnName("city").IsRequired().HasMaxLength(50);
+            // ! MAKE VIEW WITH RATING IN SQL TO QUERY
+            // builder.HasOne(p => p.RestaurantRating)
+            //      .WithOne(b => b.Restaurant)
+            //      .HasForeignKey<RestaurantRating>(b => b.RestaurantId);
         }
     }
 }

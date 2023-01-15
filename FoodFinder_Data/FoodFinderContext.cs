@@ -8,47 +8,32 @@ namespace FoodFinder.Data
         public FoodFinderContext(DbContextOptions<FoodFinderContext> options) : base(options) { }
 
         public DbSet<Restaurant> Restaurant { get; set; }
-        public DbSet<Rating> Rating { get; set; }
-        // public DbSet<Menu> Menu { get; set; }
+        public DbSet<RestaurantRating> RestaurantRating { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new RestaurantConfiguration());
-            builder.ApplyConfiguration(new RatingConfiguration());
-
+            // ! MAKE VIEW WITH RATING IN SQL TO QUERY
+            // builder.Entity<Restaurant>()
+            //     .HasOne(p => p.RestaurantRating)
+            //     .WithOne(b => b.Restaurant)
+            //     .HasForeignKey<RestaurantRating>(b => b.RestaurantId);
         }
 
         public async Task<List<Restaurant>> GetAllRestaurants()
         {
-            return await Restaurant
-                .Include(r => r.Rating)
-                .Select(r => new Restaurant
-                {
-                    Id = r.Id,
-                    RestName = r.RestName,
-                    Cuisine = r.Cuisine,
-                    City = r.City,
-                    Rating = new RestaurantRating { Score = r.Rating.Score, Grade = r.Rating.Grade }
-                })
-                .ToListAsync();
+            return await Restaurant.Include(r => r.RestaurantRating).ToListAsync();
         }
 
         public async Task<List<Restaurant>> GetByHighestRating()
         {
             return await Restaurant
-                .Include(r => r.Rating)
-                .Select(r => new Restaurant
-                {
-                    Id = r.Id,
-                    RestName = r.RestName,
-                    Cuisine = r.Cuisine,
-                    City = r.City,
-                    Rating = new RestaurantRating { Score = r.Rating.Score, Grade = r.Rating.Grade }
-                })
-                .OrderByDescending(r => r.Rating.Score)
+                .Include(r => r.RestaurantRating)
+                .OrderByDescending(r => r.RestaurantRating.Score)
                 .Take(10)
                 .ToListAsync();
         }
-
     }
+
 }
+
