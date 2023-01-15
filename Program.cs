@@ -1,3 +1,4 @@
+using FoodFinder.Data;
 using FoodFinder.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,10 +19,22 @@ if (app.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<Program>();
 }
 
+// TODO: Get all restaurants alphabetically
 // app.MapGet("/restaurants", async (FoodFinderDB db) => await db.Players.ToListAsync());
+
+// TODO: Get all restaurants by cuisine, alphabetical
+
+// TODO: Get all restaurants by given city
+
+// TODO: Get all restaurants by highest rating
+
+// TODO: Get all restaurants
+
+// TODO: Get all restaurants
+
+// TODO: Get all restaurants
+
 // app.MapGet("/ratings", async (FoodFinderDB db) => await db.Players.ToListAsync());
 // app.MapGet("/menus", async (FoodFinderDB db) => await db.Players.ToListAsync());
-// app.MapPost: return Results.Created($"/todo/player.playerId", player)
-// app.MapPatch: return Results.NoContent();
 
 app.Run();
