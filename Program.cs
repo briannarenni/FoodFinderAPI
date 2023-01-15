@@ -1,16 +1,16 @@
+using FoodFinder.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+string? connString = builder.Configuration.GetValue<string>("ConnectionStrings:FoodFinderDB");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddDbContext<PlayerDB>(options => options.UseInMemoryDatabase("players"));
-string? connString = builder.Configuration.GetValue<string>("ConnectionStrings:FoodFinderDB");
+builder.Services.AddDbContext<FoodFinderContext>(opts =>
+    opts.UseSqlServer(connString)
+);
 
-// App instance
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
