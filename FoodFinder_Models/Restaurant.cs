@@ -28,10 +28,10 @@ namespace FoodFinder.Models
         {
             builder.ToTable("Restaurant");
             builder.HasKey(r => r.Id);
-            builder.Property(r => r.Id).HasColumnName("id");
-            builder.Property(r => r.RestName).HasColumnName("rest_name").IsRequired().HasMaxLength(100);
-            builder.Property(r => r.Cuisine).HasColumnName("cuisine").IsRequired().HasMaxLength(50);
-            builder.Property(r => r.City).HasColumnName("city").IsRequired().HasMaxLength(50);
+            builder.Property(r => r.Id).HasColumnName("Id");
+            builder.Property(r => r.RestName).HasColumnName("RestName").IsRequired().HasMaxLength(100);
+            builder.Property(r => r.Cuisine).HasColumnName("Cuisine").IsRequired().HasMaxLength(50);
+            builder.Property(r => r.City).HasColumnName("City").IsRequired().HasMaxLength(50);
         }
     }
 }
