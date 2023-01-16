@@ -1,10 +1,7 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-// Id: an integer property that represents the primary key column in the Restaurant table.
-// RestName: a string property that represents the rest_name column in the Restaurant table.
-// Cuisine: a string property that represents the cuisine column in the Restaurant table.
-// City: a string property that represents the city column in the Restaurant table.
-// Rating: a collection of Rating entities that represents the relationship between the Restaurant and Rating entities
 
 // Id, RestName, Cuisine, City, Rating
 // Cuisines: American, Chinese, Greek, Italian, Mexican, Thai
@@ -15,29 +12,39 @@ namespace FoodFinder.Models
 {
     public class Restaurant
     {
+        [JsonIgnore]
         public int Id { get; set; }
         public string RestName { get; set; }
         public string Cuisine { get; set; }
         public string City { get; set; }
-        public int RestaurantRatingId { get; set; }
-        public RestaurantRating RestaurantRating { get; set; }
+        public char Grade { get; set; }
+        public int Score { get; set; }
 
+        public Restaurant() {}
+
+        public Restaurant(string restName, string cuisine, string city, char grade, int score)
+        {
+            RestName = restName;
+            Cuisine = cuisine;
+            City = city;
+            Grade = grade;
+            Score = score;
+        }
     }
 
     public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
     {
         public void Configure(EntityTypeBuilder<Restaurant> builder)
         {
-            builder.ToTable("Restaurant");
+            builder.ToTable("Restaurant_Rating");
             builder.HasKey(r => r.Id);
-            builder.Property(r => r.Id).HasColumnName("id");
+            builder.Ignore(r => r.Id);
+            builder.Property(r => r.Id).HasColumnName("id").ValueGeneratedOnAdd();
             builder.Property(r => r.RestName).HasColumnName("rest_name").IsRequired().HasMaxLength(100);
             builder.Property(r => r.Cuisine).HasColumnName("cuisine").IsRequired().HasMaxLength(50);
             builder.Property(r => r.City).HasColumnName("city").IsRequired().HasMaxLength(50);
-            // ! MAKE VIEW WITH RATING IN SQL TO QUERY
-            // builder.HasOne(p => p.RestaurantRating)
-            //      .WithOne(b => b.Restaurant)
-            //      .HasForeignKey<RestaurantRating>(b => b.RestaurantId);
+            builder.Property(r => r.Grade).HasColumnName("grade").IsRequired();
+            builder.Property(r => r.Score).HasColumnName("score").IsRequired();
         }
     }
 }

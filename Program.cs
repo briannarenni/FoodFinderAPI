@@ -18,24 +18,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// TODO: Get all restaurants alphabetically
-// app.MapGet("/restaurants", async (FoodFinderContext db) => await db.Restaurants.ToListAsync());
 app.MapGet("/restaurants", async (FoodFinderContext db) => await db.GetAllRestaurants());
 
-// TODO: Get all restaurants by cuisine, alphabetical
+app.MapGet("/restaurants/cuisine", async (FoodFinderContext db, string cuisine) => await db.GetByCuisine(cuisine));
 
-// TODO: Get all restaurants by given city (string)
+app.MapGet("/restaurants/city", async (FoodFinderContext db, string city) => await db.GetByCity(city));
 
-// TODO: Get all restaurants by highest rating
-app.MapGet("/restaurants/{score}", async (FoodFinderContext db) => await db.GetByHighestRating());
+app.MapGet("/restaurants/rating", async (FoodFinderContext db) => await db.GetByHighestRating());
 
-// TODO: Get all restaurants by lowest rating
+app.MapGet("/restaurants/rating-asc", async (FoodFinderContext db) => await db.GetByLowestRating());
 
-// TODO: Get all restaurants by highest score
+app.MapGet("/restaurants/score", async (FoodFinderContext db) => await db.GetByHighestScore());
 
-// TODO: Get all restaurants by lowest score
+app.MapGet("/restaurants/score-desc", async (FoodFinderContext db) => await db.GetByLowestScore());
 
-// app.MapGet("/ratings", async (FoodFinderDB db) => await db.Players.ToListAsync());
 // app.MapGet("/menus", async (FoodFinderDB db) => await db.Players.ToListAsync());
 
 app.Run();
