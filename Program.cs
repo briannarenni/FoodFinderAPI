@@ -32,6 +32,8 @@ app.MapGet("/restaurants/score", async (FoodFinderContext db) => await db.GetByH
 
 app.MapGet("/restaurants/score-desc", async (FoodFinderContext db) => await db.GetByLowestScore());
 
-// app.MapGet("/menus", async (FoodFinderDB db) => await db.Players.ToListAsync());
+app.MapGet("/menus/cuisine", async (FoodFinderContext db, string cuisine) => await db.GetMenu(cuisine));
+
+// app.MapPost("/menus", async (FoodFinderContext db) => await db.SeedMenuData());
 
 app.Run();

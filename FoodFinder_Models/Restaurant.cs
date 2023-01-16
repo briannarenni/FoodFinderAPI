@@ -1,18 +1,15 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-// Id, RestName, Cuisine, City, Rating
-// Cuisines: American, Chinese, Greek, Italian, Mexican, Thai
-// Cities: Atlanta, Chicago, Houston, LA, Miami, New Orleans,
-// NYC, Orlando, Portland, Seattle, San Diego, San Fran
+// COLUMNS: Id, RestName, Cuisine, City, Rating
+// CUISINES: American, Chinese, Greek, Italian, Mexican, Thai
+// CITIES: Atlanta, Chicago, Houston, Los Angeles, Miami, New Orleans,
+// New York City, Orlando, Portland, Seattle, San Diego, San Francisco
 
 namespace FoodFinder.Models
 {
     public class Restaurant
     {
-        [JsonIgnore]
         public int Id { get; set; }
         public string RestName { get; set; }
         public string Cuisine { get; set; }
@@ -22,8 +19,9 @@ namespace FoodFinder.Models
 
         public Restaurant() {}
 
-        public Restaurant(string restName, string cuisine, string city, char grade, int score)
+        public Restaurant(int id, string restName, string cuisine, string city, char grade, int score)
         {
+            Id = id;
             RestName = restName;
             Cuisine = cuisine;
             City = city;
@@ -38,7 +36,6 @@ namespace FoodFinder.Models
         {
             builder.ToTable("Restaurant_Rating");
             builder.HasKey(r => r.Id);
-            builder.Ignore(r => r.Id);
             builder.Property(r => r.Id).HasColumnName("id").ValueGeneratedOnAdd();
             builder.Property(r => r.RestName).HasColumnName("rest_name").IsRequired().HasMaxLength(100);
             builder.Property(r => r.Cuisine).HasColumnName("cuisine").IsRequired().HasMaxLength(50);
