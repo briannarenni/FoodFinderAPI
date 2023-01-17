@@ -23,13 +23,13 @@ namespace FoodFinder.Data
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
-        public async Task<string> GetByCuisine(string cuisine)
+        public async Task<string> FilterByCuisine(string cuisine)
         {
             var restaurants = await Restaurant.Where(x => x.Cuisine == cuisine).OrderBy(x => x.Cuisine).ThenBy(x => x.RestName).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
-        public async Task<string> GetByCity(string city)
+        public async Task<string> FilterByCity(string city)
         {
             var restaurants = await Restaurant.Where(x => x.City == city).OrderBy(x => x.Cuisine).ThenBy(x => x.RestName).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
@@ -65,14 +65,20 @@ namespace FoodFinder.Data
             return JsonConvert.SerializeObject(menu, Formatting.Indented);
         }
 
-        public async Task SeedMenuData()
+        public async Task<string> GetAllMenus()
         {
-            if (!Menu.Any())
-            {
-                Menu.AddRange(SeedData.menuItems);
-                await SaveChangesAsync();
-            }
+            var menu = await Menu.OrderBy(m => m.ItemGroup).ToListAsync();
+            return JsonConvert.SerializeObject(menu, Formatting.Indented);
         }
+
+        // public async Task SeedMenuData()
+        // {
+        //     if (!Menu.Any())
+        //     {
+        //         Menu.AddRange(SeedData.menuItems);
+        //         await SaveChangesAsync();
+        //     }
+        // }
 
     }
 }

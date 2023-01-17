@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-// COLUMNS: item_id, cuisine, item_name, item_price, item_group
-// CUISINES: American, Chinese, Greek, Italian, Mexican, Thai
-
 namespace FoodFinder.Models
 {
 

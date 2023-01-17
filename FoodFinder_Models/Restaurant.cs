@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-// COLUMNS: Id, RestName, Cuisine, City, Rating
-// CUISINES: American, Chinese, Greek, Italian, Mexican, Thai
 // CITIES: Atlanta, Chicago, Houston, Los Angeles, Miami, New Orleans,
 // New York City, Orlando, Portland, Seattle, San Diego, San Francisco
 
