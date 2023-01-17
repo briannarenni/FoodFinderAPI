@@ -13,18 +13,18 @@ namespace FoodFinder.Models
         public string Cuisine { get; set; }
         public string City { get; set; }
         public char Grade { get; set; }
-        public int Score { get; set; }
+        public int Rating { get; set; }
 
         public Restaurant() {}
 
-        public Restaurant(int id, string restName, string cuisine, string city, char grade, int score)
+        public Restaurant(int id, string restName, string cuisine, string city, char grade, int rating)
         {
             Id = id;
             RestName = restName;
             Cuisine = cuisine;
             City = city;
             Grade = grade;
-            Score = score;
+            Rating = rating;
         }
     }
 
@@ -39,7 +39,7 @@ namespace FoodFinder.Models
             builder.Property(r => r.Cuisine).HasColumnName("cuisine").IsRequired().HasMaxLength(50);
             builder.Property(r => r.City).HasColumnName("city").IsRequired().HasMaxLength(50);
             builder.Property(r => r.Grade).HasColumnName("grade").IsRequired();
-            builder.Property(r => r.Score).HasColumnName("score").IsRequired();
+            builder.Property(r => r.Rating).HasColumnName("rating").IsRequired();
         }
     }
 }

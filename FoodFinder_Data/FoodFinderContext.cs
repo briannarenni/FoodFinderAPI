@@ -25,25 +25,25 @@ namespace FoodFinder.Data
 
         public async Task<string> FilterByCuisine(string cuisine)
         {
-            var restaurants = await Restaurant.Where(x => x.Cuisine == cuisine).OrderBy(x => x.Cuisine).ThenBy(x => x.Score).ThenBy(x => x.RestName).ToListAsync();
+            var restaurants = await Restaurant.Where(x => x.Cuisine == cuisine).OrderBy(x => x.Cuisine).ThenByDescending(x => x.Rating).ThenBy(x => x.RestName).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
         public async Task<string> FilterByCity(string city)
         {
-            var restaurants = await Restaurant.Where(x => x.City == city).OrderBy(x => x.Cuisine).ThenBy(x => x.Score).ThenBy(x => x.RestName).ToListAsync();
+            var restaurants = await Restaurant.Where(x => x.City == city).OrderBy(x => x.Cuisine).ThenByDescending(x => x.Rating).ThenBy(x => x.RestName).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
         public async Task<string> GetByHighestRating()
         {
-            var restaurants = await Restaurant.OrderByDescending(x => x.Score).ToListAsync();
+            var restaurants = await Restaurant.OrderByDescending(x => x.Rating).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
         public async Task<string> GetByLowestRating()
         {
-            var restaurants = await Restaurant.OrderBy(x => x.Score).ToListAsync();
+            var restaurants = await Restaurant.OrderBy(x => x.Rating).ToListAsync();
             return JsonConvert.SerializeObject(restaurants, Formatting.Indented);
         }
 
