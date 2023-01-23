@@ -1,5 +1,4 @@
 using FoodFinder.Data;
-using FoodFinder.Models;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
@@ -15,7 +14,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200")
+            policy.WithOrigins("*")
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
@@ -29,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.MapGet("/restaurants", async (FoodFinderContext db) => await db.GetAllRestaurants());
 
 app.MapGet("/restaurants/cuisine", async (FoodFinderContext db, string cuisine) => await db.FilterByCuisine(cuisine));
@@ -40,11 +41,5 @@ app.MapGet("/restaurants/rating", async (FoodFinderContext db) => await db.GetBy
 app.MapGet("/restaurants/rating-low", async (FoodFinderContext db) => await db.GetByLowestRating());
 
 app.MapGet("/menus/cuisine", async (FoodFinderContext db, string cuisine) => await db.GetMenu(cuisine));
-
-// * For Testing Only
-// app.MapGet("/menu", async (FoodFinderContext db) => await db.GetAllMenus());
-// app.MapPost("/menus", async (FoodFinderContext db) => await db.SeedMenuData());
-
-app.UseCors();
 
 app.Run();
