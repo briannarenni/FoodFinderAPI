@@ -2,6 +2,7 @@ using FoodFinder.Data;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+builder.Services.AddApplicationInsightsTelemetry();
 string? connString = builder.Configuration.GetValue<string>("ConnectionStrings:FoodFinderDB");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
