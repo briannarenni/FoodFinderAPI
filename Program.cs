@@ -1,14 +1,14 @@
 using FoodFinder.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
-builder.Services.AddApplicationInsightsTelemetry();
-string? connString = builder.Configuration.GetValue<string>("ConnectionStrings:FoodFinderDB");
+
+builder.Services.AddDbContext<FoodFinderContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("foodfinder-connString")));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<FoodFinderContext>(opts =>
-    opts.UseSqlServer(connString)
-);
 
 builder.Services.AddCors(options =>
 {
