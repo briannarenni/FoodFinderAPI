@@ -1,6 +1,5 @@
 using FoodFinder.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
