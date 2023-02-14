@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodFinder.Models
 {
-
     public class Menu
     {
         public int ItemId { get; set; }
