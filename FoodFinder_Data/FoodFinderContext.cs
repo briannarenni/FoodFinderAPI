@@ -61,12 +61,5 @@ namespace FoodFinder.Data
     }
 }
 
-// public async Task SeedMenuData()
-// {
-//     if (!Menu.Any())
-//     {
-//         Menu.AddRange(SeedData.menuItems);
-//         await SaveChangesAsync();
-//     }
-// }
+// public async Task SeedMenuData(){if (!Menu.Any()){ Menu.AddRange(SeedData.menuItems);  await SaveChangesAsyc();  } }
 
