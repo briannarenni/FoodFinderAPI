@@ -2,13 +2,10 @@ using FoodFinder.Data;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddDbContext<FoodFinderContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("foodfinder-connString")));
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -19,15 +16,12 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
-
 WebApplication app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseCors();
 
 app.MapGet("/restaurants", async (FoodFinderContext db) => await db.GetAllRestaurants());
